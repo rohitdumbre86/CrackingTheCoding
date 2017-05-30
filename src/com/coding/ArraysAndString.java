@@ -117,6 +117,42 @@ public class ArraysAndString {
 		System.out.println("Palindrome");
 	}
 	
+   public static void compressString(String s)
+  {
+    StringBuilder compressor = new StringBuilder();
+    char[] a1 = s.toCharArray();
+    
+    int i = 0;
+    int compressLength = 0;
+    for(int j=1; j<a1.length; j++)
+    {
+        compressLength++;
+
+        if(a1[i] != a1[j])
+        {
+            compressor.append(a1[i]);
+            compressor.append(compressLength);
+            i=j;
+            compressLength = 0;
+        }   
+        
+        
+        
+        if(j==a1.length -1)
+        {
+           compressor.append(a1[j]);
+           compressor.append(++compressLength);
+        }
+     }
+    
+    if(compressor.length() < s.length())
+    {
+    System.out.println(compressor.toString());
+	    return;
+    }
+    System.out.println(s);	   
+  }  
+	
 	public static void OneOrMoreEdits()
 	{
 		
