@@ -153,16 +153,102 @@ public class ArraysAndString {
     System.out.println(s);	   
   }  
 	
-	public static void OneOrMoreEdits()
-	{
-		
-	}
+	public static void nullifyForZeros (int[][] matrix)
+    {
+        int M = matrix.length;
+        int N = matrix[0].length;
+
+        System.out.println("Pre conversion");
+        
+        print(matrix);
+        for (int i = 0; i < M; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                if (matrix[i][j] == 0)
+                {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        
+        // If coloumns have a zero field.
+        for (int i = 0; i < M; i++)
+        {
+            if (matrix[i][0] == 0)
+            {
+                nullifyRow(matrix, i);
+            }
+        }
+    
+        for (int j = 0; j < N; j++)
+        {
+            if (matrix[0][j] == 0)
+            {
+                nullifyColumn(matrix, j);
+            }
+        }
+        
+        System.out.println("After conversion");
+        print(matrix);
+    }
+
+    private static void print (int[][] matrix)
+    {
+        for (int i = 0; i < matrix.length; i++)
+        {
+            for (int j = 0; j < matrix[i].length; j++)
+            {
+                System.out.print(" "+matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    private static void nullifyRow (int[][] matrix, int row)
+    {
+        for (int j = 0; j < matrix[0].length; j++)
+        {
+            matrix[row][j] = 0;
+        }
+    }
+
+    private static void nullifyColumn (int[][] matrix, int col)
+    {
+        for (int i = 0; i < matrix.length; i++)
+        {
+            matrix[i][col] = 0;
+        }
+    }
 
 	public static void main(String[] args) {
 		ArraysAndString.returnUnique("abcdac");
 		ArraysAndString.returnIfPerm("abcd", "dabc");
 		ArraysAndString.returnUrlString("M r John Smith      ");
 		ArraysAndString.checkIfPalindrome("tactcoa");
+		
+		int[][] matrix1 = {{1, 2, 3, 4}, 
+                          {5, 6, 0, 7}, 
+                          {8, 9, 10, 11}};
+        System.out.println("========= Example 1=========");
+        ArraysAndString.nullifyForZeros(matrix1);
+        
+        int[][] matrix2 = {{1, 2, 3, 4}, 
+                          {5, 6, 0, 7}, 
+                          {8, 9, 1, 1},
+                          {1, 3, 4, 5}};
+    
+        System.out.println("========= Example 2=========");
+        ArraysAndString.nullifyForZeros(matrix2);
+        
+        int[][] matrix3 = {{1, 2, 3, 4}, 
+                           {5, 6, 0, 7}, 
+                           {8, 9, 1, 1},
+                           {1, 3, 4, 0}};
+
+        System.out.println("========= Example 3=========");
+        ArraysAndString.nullifyForZeros(matrix3);
 		
 	}
 }
