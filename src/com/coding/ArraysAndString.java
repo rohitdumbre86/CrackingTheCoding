@@ -221,6 +221,30 @@ public class ArraysAndString {
             matrix[i][col] = 0;
         }
     }
+	
+	
+	public static void rotateMatrixBy90(int[][] matrix) {
+
+		System.out.println("============ Matrix before rotation =========");
+		print(matrix);
+		int N = matrix.length;
+		for (int layer = 0; layer <= N / 2; layer++) {
+			int first = layer;
+			int last = N - 1 - layer;
+			for (int i = first; i < last; i++) {
+				int offset = i - first;
+
+				int top = matrix[first][i];
+
+				matrix[first][i] = matrix[last - offset][first];
+				matrix[last - offset][first] = matrix[last][last - offset];
+				matrix[last][last - offset] = matrix[i][last];
+				matrix[i][last] = top;
+			}
+		}
+		System.out.println("============ Matrix after 90 rotation =========");
+		print(matrix);
+	}
 
 	public static void main(String[] args) {
 		ArraysAndString.returnUnique("abcdac");
@@ -249,6 +273,8 @@ public class ArraysAndString {
 
         System.out.println("========= Example 3=========");
         ArraysAndString.nullifyForZeros(matrix3);
-		
+	
+		int[][] matrix90 = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 }, { 13, 14, 15, 16 } };
+		ArraysAndString.rotateMatrixBy90(matrix90);
 	}
 }
